@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-13 16:23:37.479964",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "model_company",
+  "model_path",
+  "error_type",
+  "error_description",
+  "error_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "model_company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Model Company",
+   "options": "Corporate"
+  },
+  {
+   "fieldname": "model_path",
+   "fieldtype": "Data",
+   "label": "Model Path"
+  },
+  {
+   "fieldname": "error_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Error Type"
+  },
+  {
+   "fieldname": "error_description",
+   "fieldtype": "Data",
+   "label": "Error Description"
+  },
+  {
+   "fieldname": "error_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Error Time"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-13 16:25:12.751922",
+ "modified_by": "Administrator",
+ "module": "bksec",
+ "name": "Error Log BB",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

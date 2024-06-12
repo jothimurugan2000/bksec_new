@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:fund_name",
+ "creation": "2020-08-28 14:16:07.491238",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fund_name",
+  "short_name",
+  "account_code",
+  "column_break_2",
+  "is_foreign_investor",
+  "rating",
+  "section_break_4",
+  "sales_team",
+  "fund_persons"
+ ],
+ "fields": [
+  {
+   "fieldname": "fund_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Fund Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "sales_team",
+   "fieldtype": "Table",
+   "label": "Sales Team",
+   "options": "Sales Team"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_foreign_investor",
+   "fieldtype": "Check",
+   "label": "Is Foreign Investor"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Select",
+   "label": "Rating",
+   "options": "\n1\n2\n3\n4\n5\n6\n0"
+  },
+  {
+   "fieldname": "short_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Short Name"
+  },
+  {
+   "fieldname": "account_code",
+   "fieldtype": "Data",
+   "label": "Account Code"
+  },
+  {
+   "fieldname": "fund_persons",
+   "fieldtype": "Table",
+   "label": "Fund Persons",
+   "options": "Fund Person"
+  }
+ ],
+ "links": [],
+ "modified": "2022-06-15 22:24:37.330847",
+ "modified_by": "Administrator",
+ "module": "bksec",
+ "name": "Fund",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "short_name, rating",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

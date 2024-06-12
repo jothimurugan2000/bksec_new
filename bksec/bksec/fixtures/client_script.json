@@ -1,0 +1,101 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Contact",
+  "enabled": 0,
+  "modified": "2023-11-02 13:03:53.213474",
+  "module": "Research",
+  "name": "Contact_update",
+  "script": "frappe.ui.form.on('Contact', {\r\n    after_save: function(frm) {\r\n        console.log(\"logging\");\r\n        var xhr = new XMLHttpRequest();\r\n        var doc=frm.docname;\r\n        var url = `/api/method/research.research.testcontact.insert_data?doc=${doc}`; // Replace with the actual URL path\r\n        console.log(url);\r\n        xhr.open(\"GET\", url, true);\r\n        xhr.setRequestHeader(\"Content-Type\", \"application/json;charset=UTF-8\");\r\n        xhr.responseType = 'json'; // Set the responseType to 'json' for JSON responses\r\n\r\n        xhr.onreadystatechange = function () {\r\n            if (xhr.readyState === XMLHttpRequest.DONE) {\r\n                if (xhr.status === 200) {\r\n                    // Handle the successful JSON response here\r\n                    var responseData = xhr.response;\r\n                    console.log(responseData);\r\n\r\n                    // Assuming you want to do something with the response in your form\r\n                    // For example, you can set a field in your form with the response data\r\n                    //frm.set_value('your_fieldname', responseData);\r\n                } else {\r\n                    console.error('Error:', xhr.status, xhr.statusText);\r\n                }\r\n            }\r\n        };\r\n\r\n        // Send the request with no parameters\r\n        xhr.send(); \r\n    }\r\n        \r\n    \r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "WebEx Meeting",
+  "enabled": 0,
+  "modified": "2021-04-26 20:49:42.312307",
+  "module": null,
+  "name": "WebEx Meeting-Client",
+  "script": "\nfrappe.ui.form.on('WebEx Meeting', {\n    refresh: function(frm){\n        btn_copy_action(frm);\n        fetch_rooms(frm);\n    },\n    room_number: function(frm){\n        if (typeof  frm.doc.room_number === \"undefined\" ) {\n            frm.set_value(\"link_prefix\", \"\");\n            frm.set_value(\"meeting_number\", \"\");\n            //clear_link_fields(frm);\n        }\n    },\n    meeting_link: function(frm) {\n        btn_copy_action(frm);\n    },\n    corporate: function(frm) {\n        if (frm.doc.corporate !== \"\" ) {\n            frm.set_value('link_suffix', clean_link_suffix(frm.doc.corporate));\n        }else{\n            frm.set_value('link_suffix', \"\");\n        }\n    },\n    link_suffix: function(frm) {\n        console.log(\"link_suffix change handler\");\n        if (frm.doc.link_suffix !== \"\" && (typeof frm.doc.link_prefix !== 'undefined' && frm.doc.link_prefix !== \"\")){\n            frm.set_value(\"link_suffix\",clean_link_suffix(frm.doc.link_suffix));\n            frm.set_value('meeting_link', frm.doc.link_prefix + clean_link_suffix(frm.doc.link_suffix));\n        }else{\n            frm.set_value(\"meeting_link\", \"\"); //Not clearing meeting_number since it is still valid\n        }\n    },\n    link_prefix: function(frm) {\n        if (frm.doc.link_prefix !== \"\" && frm.doc.link_suffix !== \"\" ) {\n            frm.set_value('meeting_link', frm.doc.link_prefix + frm.doc.link_suffix);\n            //Suffix \n        }else{\n            clear_link_fields(frm);\n        }\n    },\n    slot: function(frm) {\n        frm.set_value('room_number',undefined);\n        if (typeof  frm.doc.slot !== \"undefined\") {\n            recreate_from_to_datetimes(frm);\n            console.log( frm.doc.from_time + \" | \" +  frm.doc.to_time + \" | \" + frm.doc.date);\n            fetch_rooms(frm);\n        }else{\n            clear_from_to_fields(frm);\n        }\n    },\n    date: function(frm) {\n        frm.set_value('room_number', undefined);\n        if (typeof  frm.doc.slot !== \"undefined\") {\n            recreate_from_to_datetimes(frm);\n            fetch_rooms(frm);\n        }\n    }\n});\nvar fetch_rooms = function(frm) {\n    frm.fields_dict.room_number.get_query = function() {\n        return {    \n            query: \"bksec.research.doctype.webex_meeting.webex_meeting.get_meeting_rooms\" ,\n            filters: {\"start_time\": frm.doc.from_time,\n                \"end_time\": frm.doc.to_time,\n                \"meeting_date\": frm.doc.date\n                }\n        };\n    };\n};\n\nvar recreate_from_to_datetimes = function(frm){\n    var d =frappe.datetime.get_datetime_as_string(frm.doc.date);\n    var dt_str = d.split(\" \")[0];\n    \n    var st_time = dt_str + \" \" + (frm.doc.slot_start_time.length<5?\"0\"+frm.doc.slot_start_time:frm.doc.slot_start_time);\n    var end_time = dt_str + \" \" + (frm.doc.slot_end_time.length<5?\"0\"+frm.doc.slot_end_time:frm.doc.slot_end_time)\n    \n    frm.set_value('from_time' , st_time);\n    frm.set_value('to_time' , end_time);\n};\n\nvar clear_from_to_fields= function(frm){\n    frm.set_value('from_time' , undefined);\n    frm.set_value('to_time' , undefined);\n    frm.set_value('slot_start_time' , undefined);\n    frm.set_value('slot_end_time' , undefined);\n};\n\nvar clear_link_fields=function(frm){\n    frm.set_value(\"meeting_number\", \"\");\n    frm.set_value(\"meeting_link\", \"\");\n};\n\nvar clean_link_suffix = function(link_suffix){\n    return link_suffix.replace(/[^\\w\\d_]+/gi, '-').toUpperCase();\n};\n\nvar btn_copy_action = function(frm){\n    if (typeof frm.doc.meeting_link !== \"undefined\" && frm.doc.meeting_link !== \"\" ) {\n        frm.add_custom_button(__(\"Copy Meeting Link\"), function() {\n            copy_link(frm.doc.meeting_link + \"\\n\" + frm.doc.meeting_number);\n        });\n    }else{\n        cur_frm.remove_custom_button(__(\"Copy Meeting Link\"));\n    }\n};\n\nvar copy_link = function(text) {\n      var textArea = document.createElement(\"textarea\");\n      // Place in the top-left corner of screen regardless of scroll position.\n      textArea.style.position = 'fixed';\n      textArea.style.top = 0;\n      textArea.style.left = 0;\n      // Ensure it has a small width and height. Setting to 1px / 1em\n      // doesn't work as this gives a negative w/h on some browsers.\n      textArea.style.width = '2em';\n      textArea.style.height = '2em';\n    \n      // We don't need padding, reducing the size if it does flash render.\n      textArea.style.padding = 0;\n      // Clean up any borders.\n      textArea.style.border = 'none';\n      textArea.style.outline = 'none';\n      textArea.style.boxShadow = 'none';\n      // Avoid flash of the white box if rendered for any reason.\n      textArea.style.background = 'transparent';\n    \n      textArea.value = text;\n    \n      document.body.appendChild(textArea);\n      textArea.focus();\n      textArea.select();\n    \n      try {\n        var successful = document.execCommand('copy');\n        var msg = successful ? 'successful' : 'unsuccessful';\n        console.log('Copying text command was ' + msg);\n        frappe.show_alert({\n            message:__('Meeting Details Copied'),\n            indicator:'green'\n        }, 4);\n      } catch (err) {\n        console.log('Oops, unable to copy');\n        frappe.show_alert({\n            message:__('Oops, unable to copy'),\n            indicator:'red'\n        }, 4);\n      }\n      document.body.removeChild(textArea);\n    };\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Meeting",
+  "enabled": 0,
+  "modified": "2021-04-26 20:49:42.312307",
+  "module": null,
+  "name": "Meeting-Client",
+  "script": "\nfrappe.ui.form.on('Meeting', {\n    refresh: function(frm){\n        btn_copy_action(frm);\n        fetch_rooms(frm);\n    },\n    room_number: function(frm){\n        if (typeof  frm.doc.room_number === \"undefined\" ) {\n            frm.set_value(\"link_prefix\", \"\");\n            frm.set_value(\"meeting_number\", \"\");\n            //clear_link_fields(frm);\n        }\n    },\n    meeting_link: function(frm) {\n        btn_copy_action(frm);\n    },\n    corporate: function(frm) {\n        if (frm.doc.corporate !== \"\" ) {\n            frm.set_value('link_suffix', clean_link_suffix(frm.doc.corporate));\n        }else{\n            frm.set_value('link_suffix', \"\");\n        }\n    },\n    link_suffix: function(frm) {\n        console.log(\"link_suffix change handler\");\n        if (frm.doc.link_suffix !== \"\" && (typeof frm.doc.link_prefix !== 'undefined' && frm.doc.link_prefix !== \"\")){\n            frm.set_value(\"link_suffix\",clean_link_suffix(frm.doc.link_suffix));\n            frm.set_value('meeting_link', frm.doc.link_prefix + clean_link_suffix(frm.doc.link_suffix));\n        }else{\n            frm.set_value(\"meeting_link\", \"\"); //Not clearing meeting_number since it is still valid\n        }\n    },\n    link_prefix: function(frm) {\n        if (frm.doc.link_prefix !== \"\" && frm.doc.link_suffix !== \"\" ) {\n            frm.set_value('meeting_link', frm.doc.link_prefix + frm.doc.link_suffix);\n            //Suffix \n        }else{\n            clear_link_fields(frm);\n        }\n    },\n    slot: function(frm) {\n        frm.set_value('room_number',undefined);\n        if (typeof  frm.doc.slot !== \"undefined\") {\n            recreate_from_to_datetimes(frm);\n            console.log( frm.doc.from_time + \" | \" +  frm.doc.to_time + \" | \" + frm.doc.date);\n            fetch_rooms(frm);\n        }else{\n            clear_from_to_fields(frm);\n        }\n    },\n    date: function(frm) {\n        frm.set_value('room_number', undefined);\n        if (typeof  frm.doc.slot !== \"undefined\") {\n            recreate_from_to_datetimes(frm);\n            fetch_rooms(frm);\n        }\n    }\n});\nvar fetch_rooms = function(frm) {\n    frm.fields_dict.room_number.get_query = function() {\n        return {    \n            query: \"bksec.research.doctype.meeting.meeting.get_meeting_rooms\" ,\n            filters: {\"start_time\": frm.doc.from_time,\n                \"end_time\": frm.doc.to_time,\n                \"meeting_date\": frm.doc.date\n                }\n        };\n    };\n};\n\nvar recreate_from_to_datetimes = function(frm){\n    var d =frappe.datetime.get_datetime_as_string(frm.doc.date);\n    var dt_str = d.split(\" \")[0];\n    \n    var st_time = dt_str + \" \" + (frm.doc.slot_start_time.length<5?\"0\"+frm.doc.slot_start_time:frm.doc.slot_start_time);\n    var end_time = dt_str + \" \" + (frm.doc.slot_end_time.length<5?\"0\"+frm.doc.slot_end_time:frm.doc.slot_end_time)\n    \n    frm.set_value('from_time' , st_time);\n    frm.set_value('to_time' , end_time);\n};\n\nvar clear_from_to_fields= function(frm){\n    frm.set_value('from_time' , undefined);\n    frm.set_value('to_time' , undefined);\n    frm.set_value('slot_start_time' , undefined);\n    frm.set_value('slot_end_time' , undefined);\n};\n\nvar clear_link_fields=function(frm){\n    frm.set_value(\"meeting_number\", \"\");\n    frm.set_value(\"meeting_link\", \"\");\n};\n\nvar clean_link_suffix = function(link_suffix){\n    return link_suffix.replace(/[^\\w\\d_]+/gi, '-').toUpperCase();\n};\n\nvar btn_copy_action = function(frm){\n    if (typeof frm.doc.meeting_link !== \"undefined\" && frm.doc.meeting_link !== \"\" ) {\n        frm.add_custom_button(__(\"Copy Meeting Link\"), function() {\n            copy_link(frm.doc.meeting_link + \"\\n\" + frm.doc.meeting_number);\n        });\n    }else{\n        cur_frm.remove_custom_button(__(\"Copy Meeting Link\"));\n    }\n};\n\nvar copy_link = function(text) {\n      var textArea = document.createElement(\"textarea\");\n      // Place in the top-left corner of screen regardless of scroll position.\n      textArea.style.position = 'fixed';\n      textArea.style.top = 0;\n      textArea.style.left = 0;\n      // Ensure it has a small width and height. Setting to 1px / 1em\n      // doesn't work as this gives a negative w/h on some browsers.\n      textArea.style.width = '2em';\n      textArea.style.height = '2em';\n    \n      // We don't need padding, reducing the size if it does flash render.\n      textArea.style.padding = 0;\n      // Clean up any borders.\n      textArea.style.border = 'none';\n      textArea.style.outline = 'none';\n      textArea.style.boxShadow = 'none';\n      // Avoid flash of the white box if rendered for any reason.\n      textArea.style.background = 'transparent';\n    \n      textArea.value = text;\n    \n      document.body.appendChild(textArea);\n      textArea.focus();\n      textArea.select();\n    \n      try {\n        var successful = document.execCommand('copy');\n        var msg = successful ? 'successful' : 'unsuccessful';\n        console.log('Copying text command was ' + msg);\n        frappe.show_alert({\n            message:__('Meeting Details Copied'),\n            indicator:'green'\n        }, 4);\n      } catch (err) {\n        console.log('Oops, unable to copy');\n        frappe.show_alert({\n            message:__('Oops, unable to copy'),\n            indicator:'red'\n        }, 4);\n      }\n      document.body.removeChild(textArea);\n    };\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sector",
+  "enabled": 0,
+  "modified": "2020-07-30 22:45:48.811595",
+  "module": null,
+  "name": "Sector-Client",
+  "script": "// cur_frm.add_fetch(\"sector_head\",\"employee_name\",\"sector_head_name\");\r\n\r\nfrappe.ui.form.on('Sector', {\r\n    sector_head: function(frm) {\r\n        if ( typeof frm.doc.sector_head === \"undefined\") {\r\n            frm.set_value(\"sector_head_name\", \"\") \r\n\t\t} \r\n\t}\r\n})",
+  "view": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee",
+  "enabled": 0,
+  "modified": "2020-07-30 22:43:28.028746",
+  "module": null,
+  "name": "Employee-Client",
+  "script": "// cur_frm.add_fetch(\"reports_to\",\"employee_name\",\"reports_to_name\");\r\n\r\nfrappe.ui.form.on('Employee', {\r\n    reports_to: function(frm) {\r\n        if ( typeof frm.doc.reports_to === \"undefined\") {\r\n            frm.set_value(\"reports_to_name\", \"\") \r\n\t\t} \r\n\t}\r\n})",
+  "view": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Corporate",
+  "enabled": 0,
+  "modified": "2020-07-31 14:29:30.165582",
+  "module": null,
+  "name": "Corporate-Client",
+  "script": "frappe.ui.form.on('Corporate', {\n\trefresh(frm) {\n\t\t// your code here\n\t}\n})\n\nfrappe.ui.form.on('Research Team', {\n    research_analyst: function(frm, cdt, cdn) {\n        let row= frappe.get_doc(cdt,cdn);\n        if ( typeof row.research_analyst === \"undefined\") {\n            frappe.model.set_value(row.doctype, row.name, \"research_analyst_name\", \"\");\n            //=======Alternate method=========\n            //row.research_analyst_name = \"\";\n            //cur_frm.refresh_field(\"research_team\");\n\t\t} \n\t}\n})\n",
+  "view": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Asset",
+  "enabled": 0,
+  "modified": "2020-11-09 14:43:04.635086",
+  "module": null,
+  "name": "Asset-Client",
+  "script": "//Filter the Select Options based on value in another field\n//in-use_location should show only those asset_locations that have their location value matching\n//the one user has selected in the Asset form.\n//If the Location field is cleared, then the In Use location should also be cleared.\nfrappe.ui.form.on('Asset', {\n\tlocation: function(frm) {\n\t\tfrm.set_query(\"in_use_location\", function() {\n\t\t\treturn {\n\t\t\t\t\"filters\": [\n\t\t\t\t\t[\"Asset Use Location\",\"asset_location\", \"=\", frm.doc.location]\n\t\t\t\t]\n\t\t\t};\n\t\t});\n\t\tif ( typeof frm.doc.location === \"undefined\") {\n            frm.set_value(\"in_use_location\", \"\") ;\n\t\t}\n\t}\n});",
+  "view": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Market Investment",
+  "enabled": 0,
+  "modified": "2022-06-10 17:43:46.284993",
+  "module": null,
+  "name": "Market Investment-Form",
+  "script": "frappe.ui.form.on('Market Investment', {\n\tbuy_amount: function(frm){\n        frm.set_value('net_investment',(frm.doc.buy_amount));\n    },\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Trip",
+  "enabled": 0,
+  "modified": "2022-12-21 14:13:02.042354",
+  "module": "Client Expenses",
+  "name": "SplitButton",
+  "script": "frappe.ui.form.on('Trip', {\n\trefresh(frm) {\n\t\t// your code here\n\t}\n})\n\nfrappe.ui.form.on('Expense Entry', {\n\tsplit: function(frm, cdt, cdn) {\n        let row= frappe.get_doc(cdt,cdn);\n        frappe.msgprint(\"Hi\");\n        //if ( typeof row.research_analyst === \"undefined\") {\n        //    frappe.model.set_value(row.doctype, row.name, \"research_analyst_name\", \"\");\n            //=======Alternate method=========\n            //row.research_analyst_name = \"\";\n            //cur_frm.refresh_field(\"research_team\");\n        //} \n    }\n\t\t\n\t\n\t\n})",
+  "view": "Form"
+ }
+]

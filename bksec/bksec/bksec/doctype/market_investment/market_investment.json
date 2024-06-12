@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2022-06-09 17:19:44.511941",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "investment_type",
+  "investment_date",
+  "product",
+  "buy_amount",
+  "sell_amount",
+  "buy_no_of_contracts",
+  "sell_no_of_contracts",
+  "net_investment",
+  "emp_id",
+  "cust_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "investment_type",
+   "fieldtype": "Select",
+   "label": "Investment Type",
+   "options": "FDI Equity\nFPI Derivative\nMutual Fund\nMF Derivative"
+  },
+  {
+   "fieldname": "investment_date",
+   "fieldtype": "Date",
+   "label": "Investment Date"
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Select",
+   "label": "Product",
+   "options": "Stock Exchange\nPrimary Market & Others\nIndex Futures\nIndex Options\nStock Futures\nStock Options\nInterest Rate Futures\nMF Equity\nMF Debt"
+  },
+  {
+   "description": "Rs Crore",
+   "fieldname": "buy_amount",
+   "fieldtype": "Currency",
+   "label": "Buy Amount",
+   "precision": "2"
+  },
+  {
+   "description": "Rs Crore",
+   "fieldname": "sell_amount",
+   "fieldtype": "Currency",
+   "label": "Sell Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "buy_no_of_contracts",
+   "fieldtype": "Int",
+   "label": "Buy No of Contracts"
+  },
+  {
+   "fieldname": "sell_no_of_contracts",
+   "fieldtype": "Int",
+   "label": "Sell No of Contracts"
+  },
+  {
+   "fieldname": "net_investment",
+   "fieldtype": "Currency",
+   "label": "Net Investment",
+   "precision": "2"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "cust_name",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-03-03 16:02:31.246994",
+ "modified_by": "Administrator",
+ "module": "bksec",
+ "name": "Market Investment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

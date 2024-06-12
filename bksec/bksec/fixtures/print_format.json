@@ -1,0 +1,33 @@
+[
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Trip",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": null,
+  "font_size": 14,
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2><div>Trip</div><br><small class=\\\"sub-heading\\\">{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"workflow_state\", \"print_hide\": 0, \"label\": \"Workflow State\"}, {\"fieldname\": \"trip_name\", \"print_hide\": 0, \"label\": \"Trip Name\"}, {\"fieldname\": \"from\", \"print_hide\": 0, \"label\": \"From\"}, {\"fieldname\": \"current_user\", \"print_hide\": 0, \"label\": \"Created By\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"approval_status\", \"print_hide\": 0, \"label\": \"Approval Status\"}, {\"fieldname\": \"to\", \"print_hide\": 0, \"label\": \"To\"}, {\"fieldname\": \"description\", \"print_hide\": 0, \"label\": \"Description\"}, {\"fieldname\": \"trip_by\", \"print_hide\": 0, \"label\": \"Trip By\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_trip_bills\", \"print_hide\": 0, \"label\": \"Total Trip Bills\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"amt_not_allocated_to_clients\", \"print_hide\": 0, \"label\": \"Amount not Allocated to Clients\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Clients\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"clients\", \"print_hide\": 0, \"label\": \"Clients\", \"visible_columns\": [{\"fieldname\": \"client\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"trip_overheads\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"trip_expenses\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Expense Bills\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"expense_bills\", \"print_hide\": 0, \"label\": \"Expense Bills\", \"visible_columns\": [{\"fieldname\": \"expense_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"bill_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"bill_no\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"bill_date\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"split\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"image_file\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"bill_snapshot\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"remarks\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldname\": \"clientwise_expense_split\", \"print_hide\": 0, \"label\": \"Clientwise Expense Split\", \"visible_columns\": [{\"fieldname\": \"client\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"split_\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"split_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"expense_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"expense_entry_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"bill_reference\", \"print_width\": \"\", \"print_hide\": 0}]}]",
+  "html": null,
+  "line_breaks": 0,
+  "margin_bottom": 15.0,
+  "margin_left": 15.0,
+  "margin_right": 15.0,
+  "margin_top": 15.0,
+  "modified": "2023-06-12 13:56:45.109372",
+  "module": "Client Expenses",
+  "name": "TripPrint",
+  "page_number": "Hide",
+  "print_format_builder": 1,
+  "print_format_builder_beta": 0,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ }
+]

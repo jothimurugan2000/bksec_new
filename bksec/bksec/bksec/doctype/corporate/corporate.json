@@ -1,0 +1,341 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:nse_code",
+ "creation": "2020-12-01 19:53:42.662867",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "corporate_name",
+  "sector",
+  "column_break_3",
+  "coverage_type",
+  "cap_type",
+  "section_break_4",
+  "nse_code",
+  "bb_code",
+  "cin",
+  "column_break_7",
+  "bse_code",
+  "isin_code",
+  "reuters_code",
+  "section_break_13",
+  "research_team",
+  "quarterly_estimate_section",
+  "in_qtrly_estimate",
+  "base_path",
+  "sector_folder",
+  "column_break_17",
+  "model_path",
+  "file_name",
+  "file_extension",
+  "others_section",
+  "web_site",
+  "is_f_and_o",
+  "is_bb_upload",
+  "disabled",
+  "column_break_33",
+  "business_profile",
+  "metrics_section",
+  "price",
+  "target_price",
+  "number_of_shares",
+  "beta",
+  "consensus",
+  "column_break_20",
+  "reco",
+  "52_week_high",
+  "52_week_low",
+  "avg_daily_turnover_6m_in_usd"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "corporate_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Corporate Name",
+   "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "sector",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sector",
+   "options": "Sector",
+   "search_index": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "None",
+   "fieldname": "coverage_type",
+   "fieldtype": "Select",
+   "label": "Coverage Type",
+   "options": "None\nFull\nSoft"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "bb_code",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "BB Code",
+   "search_index": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "nse_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "NSE Code",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "isin_code",
+   "fieldtype": "Data",
+   "label": "ISIN Code"
+  },
+  {
+   "fieldname": "reuters_code",
+   "fieldtype": "Data",
+   "label": "Reuters Code"
+  },
+  {
+   "fieldname": "cin",
+   "fieldtype": "Data",
+   "label": "CIN"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "quarterly_estimate_section",
+   "fieldtype": "Section Break",
+   "label": "Quarterly Estimate"
+  },
+  {
+   "default": "0",
+   "fieldname": "in_qtrly_estimate",
+   "fieldtype": "Check",
+   "label": "In Qtrly Estimate"
+  },
+  {
+   "fieldname": "model_path",
+   "fieldtype": "Data",
+   "label": "Model Path",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sector_folder",
+   "fieldtype": "Data",
+   "label": "Sector Folder"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "bse_code",
+   "fieldtype": "Data",
+   "label": "BSE Code"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "research_team",
+   "fieldtype": "Table",
+   "ignore_user_permissions": 1,
+   "label": "Research Team",
+   "options": "Research Team"
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "metrics_section",
+   "fieldtype": "Tab Break",
+   "label": "Metrics"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "Price",
+   "precision": "2"
+  },
+  {
+   "fieldname": "target_price",
+   "fieldtype": "Currency",
+   "label": "Target Price",
+   "precision": "2"
+  },
+  {
+   "fieldname": "number_of_shares",
+   "fieldtype": "Float",
+   "label": "Number of Shares",
+   "precision": "4"
+  },
+  {
+   "fieldname": "beta",
+   "fieldtype": "Float",
+   "label": "Beta",
+   "precision": "4"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "52_week_high",
+   "fieldtype": "Currency",
+   "label": "52 Week High",
+   "precision": "4"
+  },
+  {
+   "fieldname": "52_week_low",
+   "fieldtype": "Currency",
+   "label": "52 Week Low",
+   "precision": "4"
+  },
+  {
+   "fieldname": "avg_daily_turnover_6m_in_usd",
+   "fieldtype": "Currency",
+   "label": "Avg Daily Turnover 6M in USD",
+   "precision": "4"
+  },
+  {
+   "fieldname": "cap_type",
+   "fieldtype": "Select",
+   "label": "Cap Type",
+   "options": "\nSmall Cap\nMid Cap\nLarge Cap"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "others_section",
+   "fieldtype": "Section Break",
+   "label": "Others"
+  },
+  {
+   "fieldname": "web_site",
+   "fieldtype": "Data",
+   "label": "Web Site"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_f_and_o",
+   "fieldtype": "Check",
+   "label": "Is F and O"
+  },
+  {
+   "fieldname": "column_break_33",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "business_profile",
+   "fieldtype": "Small Text",
+   "label": "Business Profile"
+  },
+  {
+   "fieldname": "reco",
+   "fieldtype": "Select",
+   "label": "Reco",
+   "options": "\nBuy\nHold\nSell\nOP\nUP\nUR"
+  },
+  {
+   "fieldname": "consensus",
+   "fieldtype": "Currency",
+   "label": "Consensus",
+   "precision": "4"
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  },
+  {
+   "default": "\\\\192.168.10.12\\Database\\",
+   "fieldname": "base_path",
+   "fieldtype": "Data",
+   "label": "Base Path"
+  },
+  {
+   "fieldname": "file_name",
+   "fieldtype": "Data",
+   "label": "File Name"
+  },
+  {
+   "fieldname": "file_extension",
+   "fieldtype": "Data",
+   "label": "File Extension"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_bb_upload",
+   "fieldtype": "Check",
+   "label": "Upload to Bloomberg",
+   "read_only_depends_on": "eval: !(doc.model_path)"
+  }
+ ],
+ "links": [],
+ "modified": "2024-04-30 12:55:26.847647",
+ "modified_by": "Administrator",
+ "module": "bksec",
+ "name": "Corporate",
+ "name_case": "UPPER CASE",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Research Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "bb_code, nse_code, bse_code,sector",
+ "show_name_in_global_search": 1,
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "corporate_name",
+ "track_changes": 1
+}

@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:family_name",
+ "creation": "2022-12-19 10:53:55.577353",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "family_name",
+  "description",
+  "disabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "family_name",
+   "fieldtype": "Data",
+   "label": "Family Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Customer",
+   "link_fieldname": "client_family"
+  }
+ ],
+ "modified": "2024-01-09 17:23:34.306929",
+ "modified_by": "Administrator",
+ "module": "bksec",
+ "name": "Client Family",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

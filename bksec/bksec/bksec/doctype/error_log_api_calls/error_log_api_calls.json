@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-11-17 14:48:29.818363",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "context",
+  "column_break_lfn63",
+  "log_time",
+  "request_section",
+  "api_url",
+  "column_break_d2gjl",
+  "method",
+  "section_break_zekqt",
+  "request_body",
+  "response_section",
+  "server_messages",
+  "exception",
+  "exc"
+ ],
+ "fields": [
+  {
+   "fieldname": "context",
+   "fieldtype": "Data",
+   "label": "Context"
+  },
+  {
+   "fieldname": "request_section",
+   "fieldtype": "Section Break",
+   "label": "Request"
+  },
+  {
+   "fieldname": "api_url",
+   "fieldtype": "Data",
+   "label": "API URL"
+  },
+  {
+   "fieldname": "column_break_d2gjl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "method",
+   "fieldtype": "Data",
+   "label": "Method"
+  },
+  {
+   "fieldname": "section_break_zekqt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "request_body",
+   "fieldtype": "Code",
+   "label": "Request Body"
+  },
+  {
+   "fieldname": "response_section",
+   "fieldtype": "Section Break",
+   "label": "Response"
+  },
+  {
+   "fieldname": "server_messages",
+   "fieldtype": "Data",
+   "label": "Server Messages"
+  },
+  {
+   "fieldname": "exception",
+   "fieldtype": "Code",
+   "label": "Exception"
+  },
+  {
+   "fieldname": "exc",
+   "fieldtype": "Code",
+   "label": "Exc"
+  },
+  {
+   "fieldname": "column_break_lfn63",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "log_time",
+   "fieldtype": "Datetime",
+   "label": "Log Time"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-11-17 15:15:09.128016",
+ "modified_by": "Administrator",
+ "module": "bksec",
+ "name": "Error Log API Calls",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Talend Process",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
